@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bulk Email Sender - BMR Enterprises</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f0f2f5;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: #fff;
+      padding: 40px;
+      width: 100%;
+      max-width: 700px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #555;
+    }
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    textarea {
+      resize: vertical;
+    }
+    button {
+      background-color: #1a73e8;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #155ab6;
+    }
+    ul {
+      padding: 0;
+      list-style: none;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    li {
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>BMR Enterprises</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul>
+        {% for category, message in messages %}
+          <li style="color: {% if category == 'error' %}red{% else %}green{% endif %};">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+      <label for="recipients">Recipients (comma separated):</label>
+      <input type="text" name="recipients" id="recipients" placeholder="email1@example.com, email2@example.com" />
+
+      <label for="subject">Subject:</label>
+      <input type="text" name="subject" id="subject" placeholder="Enter email subject" />
+
+      <label for="content">Content:</label>
+      <textarea name="content" id="content" rows="8" placeholder="Write your email content here"></textarea>
+
+      <button type="submit">Send Emails</button>
+    </form>
+  </div>
+</body>
+</html>
